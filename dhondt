@@ -86,10 +86,11 @@ import sys
 import getopt
 
 outputFormat = "html"
+nameLength = 9
 
-usageText = "usage: [-h/--help] [-o/--output_format <text|html>]"
+usageText = "usage: [-h/--help] [-o/--output_format <text|html>] [-l/--name_length <max length>]"
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "ho:", ["help", "output_format="])
+    opts, args = getopt.getopt(sys.argv[1:], "ho:l:", ["help", "output_format=", "name_length="])
 except getopt.GetoptError as err:
     print(usageText)
     sys.exit(err)
@@ -101,6 +102,11 @@ for optTup in opts:
         sys.exit(0)
     elif opt == "-o" or opt == "--output_format": # TODO : dont duplicate options literals
         outputFormat = optTup[1]
+    elif opt == "-l" or opt == "--name_length": # TODO : dont duplicate options literals
+        try:
+            nameLength = int(optTup[1])
+        except:
+            print("%s not a valid number, using default (%d)" % (optTup[1], nameLength), file=sys.stderr)
 
 
 # Get file names.
@@ -173,7 +179,7 @@ try:
                 )
         for p in sorted_parties:
             xprint("<tr>")
-            xprint("<td>%s</td>" % (p, ))
+            xprint("<td>%-*s</td>" % (nameLength, p[:nameLength], ))
             xprint("<td>%s</td>" % (votes[p], ))
             xprint("<td>%.2f</td>" % (votes_pct[p], ))
             xprint("<td>%s</td>" % (dhondt_seats[p], ))
