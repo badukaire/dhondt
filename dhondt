@@ -85,19 +85,31 @@ def load_data(stream, listProcessedLines):
 import sys
 import getopt
 
+outputFormat = "html"
+
+usageText = "usage: [-h/--help] [-o/--output_format <text|html>]"
 try:
     opts, args = getopt.getopt(sys.argv[1:], "ho:", ["help", "output_format="])
 except getopt.GetoptError as err:
-    print("usage: [-h/--help] [-o/--output_format <text|html>]")
+    print(usageText)
     sys.exit(err)
+
+for optTup in opts:
+    opt = optTup[0]
+    if opt == "-h" or opt == "--help":
+        print(usageText)
+        sys.exit(0)
+    elif opt == "-o" or opt == "--output_format": # TODO : dont duplicate options literals
+        outputFormat = optTup[1]
+
 
 # Get file names.
 try:
-    output_filename = args[2]
+    output_filename = args[1]
 except IndexError:
     output_filename = None
 try:
-    input_filename = args[1]
+    input_filename = args[0]
 except IndexError:
     input_filename = None
 
