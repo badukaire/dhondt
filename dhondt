@@ -151,7 +151,7 @@ modified_sl_seats_pct = dict(
         (p, modified_sl_seats[p] / total_seats * 100)
         for p in modified_sl_seats)
 
-# Write results as an HTML table.
+# Write results as an HTML or text table.
 import locale
 sorted_parties = [(votes[p], p) for p in votes]
 sorted_parties.sort(reverse=True)
@@ -191,6 +191,13 @@ try:
                 + "  SL |   SL % |"
                 + " MSL |  MSL % |"
                 )
+            tableColumn = ("|-%s-" % (nameLength * "-", )
+                + "|---------|--------|"
+                + "-----|--------|"
+                + "-----|--------|"
+                + "-----|--------|"
+                )
+            xprint(tableColumn)
 
         if outputFormat == optValueFormat_html:
           for p in sorted_parties:
@@ -217,5 +224,6 @@ try:
                  + "| %6.2f " % (sl_seats_pct[p], )
                  + "| %3s " % (modified_sl_seats[p], )
                  + "| %6.2f |" % (modified_sl_seats_pct[p], ))
+          xprint(tableColumn)
 except IOError:
     sys.exit("Unable to write results to output file")
