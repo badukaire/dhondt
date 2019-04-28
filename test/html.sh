@@ -7,6 +7,6 @@ do
   BF=$( basename $F | cut -d. -f1 )
   HTML=output/$BF.html
   echo "file $F => $HTML"
-  ../dhondt $F > $HTML
+  ../dhondt --name_length 13 $F > $HTML
 done
 
