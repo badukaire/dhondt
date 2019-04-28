@@ -2,16 +2,22 @@
 
 #
 # A few different formulas for quotients.
+# - the D'Hondt formula is the most restrictive with small parties
+# - the Sainte-Lague formula is less restrictive with small parties
+# - the Modified Sainte-Lague formula is even less restrictive
 #
 
+# the D'Hondt formula
 def dhondt_formula(votes, seats):
     return votes / (seats + 1)
 
+# the Sainte-Lague formula
 def sl_formula(votes, seats):
     return votes / (2 * seats + 1)
 
+# the Modified Sainte-Lague formula
 def modified_sl_formula(votes, seats):
-    divisor = 1.4 if seats == 0 else (2 * seats + 1)
+    divisor = 1.4 if seats == 0 else 2 * seats + 1
     return votes / divisor
 
 # Calculates the number of seats for each party using the given quotient
@@ -19,6 +25,8 @@ def modified_sl_formula(votes, seats):
 #
 # - party_votes is a dictionary with party names and their number of votes.
 # - seats is the total number of seats to allocate.
+# - quotient_formula is the function to be applied to calculate the quotient of votes / seats
+#   and can be one the above-defined ones: DHondt, Sainte-Lague, Modified Sainte-Lague
 #
 # Returns the result as a dictionary with party names and number of seats.
 #
