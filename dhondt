@@ -27,15 +27,16 @@ def modified_sl_formula(votes, seats):
 # - seats is the total number of seats to allocate.
 # - quotient_formula is the function to be applied to calculate the quotient of votes / seats
 #   and can be one the above-defined ones: DHondt, Sainte-Lague, Modified Sainte-Lague
+# - resultDict is passed for the result, containing a dictionary with party names and number of seats.
 #
-# Returns the result as a dictionary with party names and number of seats.
+# Returns the lenght of the result dictionary. If it's 0, there may be an error
 #
-def proportional_seats(party_votes, total_seats, quotient_formula):
+def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
     # Calculate the quotients matrix (list in this case).
     quot = []
-    ret = dict()
+    resultDict.clear()
     for p in party_votes:
-        ret[p] = 0
+        resultDict[p] = 0
         for s in range(0, total_seats):
             q = quotient_formula(party_votes[p], s)
             quot.append((q, p))
@@ -45,8 +46,9 @@ def proportional_seats(party_votes, total_seats, quotient_formula):
 
     # Take the highest quotients with the assigned parties.
     for s in range(0, total_seats):
-        ret[quot[s][1]] += 1
-    return ret
+        resultDict[quot[s][1]] += 1
+
+    return len(resultDict)
 
 # Loads voting data from the given stream.
 #
@@ -94,9 +96,12 @@ except ValueError:
     sys.exit("Invalid line in data file")
 
 # Calculate seats.
-dhondt_seats = proportional_seats(votes, total_seats, dhondt_formula)
-sl_seats = proportional_seats(votes, total_seats, sl_formula)
-modified_sl_seats = proportional_seats(votes, total_seats, modified_sl_formula)
+dhondt_seats = dict()
+proportional_seats(votes, total_seats, dhondt_formula, dhondt_seats)
+sl_seats = dict()
+proportional_seats(votes, total_seats, sl_formula, sl_seats)
+modified_sl_seats = dict()
+proportional_seats(votes, total_seats, modified_sl_formula, modified_sl_seats)
 
 # Calculate percentages.
 total_votes = sum(votes.values())
