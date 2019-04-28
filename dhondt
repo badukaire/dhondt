@@ -64,7 +64,10 @@ def load_data(stream):
     total_seats = 0
     have_seats = False
     votes = dict()
+    numLine = 0
     for line in stream:
+        numLine += 1
+        print("line #%d" % numLine, file=sys.stderr)
         if line.startswith("#"):
             continue
         line = line.strip()
