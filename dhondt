@@ -199,8 +199,8 @@ try:
                 )
             xprint(tableColumn)
 
-        if outputFormat == optValueFormat_html:
-          for p in sorted_parties:
+        for p in sorted_parties:
+          if outputFormat == optValueFormat_html:
             xprint("<tr>")
             xprint("<td>%s</td>" % (p[:nameLength], ))
             xprint("<td>%s</td>" % (votes[p], ))
@@ -212,9 +212,7 @@ try:
             xprint("<td>%s</td>" % (modified_sl_seats[p], ))
             xprint("<td>%.2f</td>" % (modified_sl_seats_pct[p], ))
             xprint("</tr>")
-          xprint("</table></body></html>")
-        else: # text
-          for p in sorted_parties:
+          else: # text
             xprint("| %-*s " % (nameLength, p[:nameLength], )
                  + "| %7s " % (votes[p], )
                  + "| %6.2f " % (votes_pct[p], )
@@ -224,6 +222,9 @@ try:
                  + "| %6.2f " % (sl_seats_pct[p], )
                  + "| %3s " % (modified_sl_seats[p], )
                  + "| %6.2f |" % (modified_sl_seats_pct[p], ))
-          xprint(tableColumn)
+        if outputFormat == optValueFormat_html:
+            xprint("</table></body></html>")
+        else: # text
+            xprint(tableColumn)
 except IOError:
     sys.exit("Unable to write results to output file")
