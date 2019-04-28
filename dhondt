@@ -199,7 +199,13 @@ try:
                 )
             xprint(tableColumn)
 
+        dhondt_seats_total = 0
+        sl_seats_total = 0
+        modified_sl_seats_total = 0
         for p in sorted_parties:
+          dhondt_seats_total += dhondt_seats[p]
+          sl_seats_total += sl_seats[p]
+          modified_sl_seats_total += modified_sl_seats[p]
           if outputFormat == optValueFormat_html:
             xprint("<tr>")
             xprint("<td>%s</td>" % (p[:nameLength], ))
@@ -223,8 +229,28 @@ try:
                  + "| %3s " % (modified_sl_seats[p], )
                  + "| %6.2f |" % (modified_sl_seats_pct[p], ))
         if outputFormat == optValueFormat_html:
+            xprint("<tr>")
+            xprint("<td></td>")
+            xprint("<td></td>")
+            xprint("<td></td>")
+            xprint("<td>%s</td>" % (dhondt_seats_total, ))
+            xprint("<td></td>")
+            xprint("<td>%s</td>" % (sl_seats_total, ))
+            xprint("<td></td>")
+            xprint("<td>%s</td>" % (modified_sl_seats_total, ))
+            xprint("<td></td>")
+            xprint("</tr>")
             xprint("</table></body></html>")
         else: # text
             xprint(tableColumn)
+            xprint("| %s " % (nameLength * " ", )
+                 + "|         "
+                 + "|        "
+                 + "| %3s " % (dhondt_seats_total, )
+                 + "|        "
+                 + "| %3s " % (sl_seats_total, )
+                 + "|        "
+                 + "| %3s " % (modified_sl_seats_total, )
+                 + "|        |")
 except IOError:
     sys.exit("Unable to write results to output file")
