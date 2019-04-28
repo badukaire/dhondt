@@ -1,25 +1,36 @@
+#Resultados electorales de Girona 2017
+#Escrutado	100,00%
+#Total Escaños	17
+17
 
-Resultados electorales de Girona 2017
-Escrutado	100,00%
-Total Escaños	17
-Censo	0
-Votos emitidos	409.966
-Abstenciones	107.919
-Votos en blanco	1.833
-Votos nulos	1.863
-Resultados Votos por Partidos de Girona
-Partidos	Escaños	Votos	%
-JUNTSxCAT	7	149.638	36,83%
-ERC-CatSí	4	88.582	21,80%
-C's	4	79.634	19,60%
-PSC	1	35.197	8,66%
-CUP	1	21.708	5,34%
-CatComú-Podem	0	16.482	4,06%
-CatCom?-Podem	0	16.482	4,06%
-PP	0	11.646	2,87%
-PACMA	0	2.582	0,64%
-RECORTES CERO-GRUPO VERDE	0	560	0,14%
-PU M+J	0	241	0,06%
-ERC-CatS?		0	0%
+#Censo	0
+#Votos emitidos	409.966
+#Abstenciones	107.919
+#Votos en blanco	1.833
+#Votos nulos	1.863
+#Resultados Votos por Partidos de Girona
+#Partidos	Escaños	Votos	%
 
+JUNTSxCAT;149638
+ERC-CatSí;88582
+C's;79634
+PSC;35197
+CUP;21708
+CatComú-Podem;16482
+PP;11646
+PACMA;2582
+RECORTES CERO-GRUPO VERDE;560
+PU M+J;241
 
+#JUNTSxCAT	7	149.638	36,83%
+#ERC-CatSí	4	88.582	21,80%
+#C's	4	79.634	19,60%
+#PSC	1	35.197	8,66%
+#CUP	1	21.708	5,34%
+#CatComú-Podem	0	16.482	4,06%
+#CatCom?-Podem	0	16.482	4,06%
+#PP	0	11.646	2,87%
+#PACMA	0	2.582	0,64%
+#RECORTES CERO-GRUPO VERDE	0	560	0,14%
+#PU M+J	0	241	0,06%
+#ERC-CatS?		0	0%

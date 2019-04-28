@@ -1,18 +1,30 @@
-Resultados electorales de Barcelona 2017
-Escrutado	100,00%
-Total Escaños	85
-Censo	0
-Votos emitidos	3.296.800
-Abstenciones	859.509
-Votos en blanco	14.163
-Votos nulos	10.925
-C's	24	868.365	26,54%
-ERC-CatSí	18	678.030	20,72%
-JUNTSxCAT	17	624.261	19,08%
-PSC	13	497.650	15,21%
-CatComú-Podem	7	276.810	8,46%
-CatCom?-Podem	7	276.810	8,46%
-CUP	3	143.711	4,39%
-PP	3	142.934	4,37%
-PACMA	0	31.330	0,96%
-RECORTES CERO-GRUPO VERDE	0	8.621	0,26%
+#Resultados electorales de Barcelona 2017
+#Escrutado	100,00%
+#Total Escaños	85
+85
+
+#Censo	0
+#Votos emitidos	3.296.800
+#Abstenciones	859.509
+#Votos en blanco	14.163
+#Votos nulos	10.925
+
+C's;868365
+ERC-CatSí;678030
+JUNTSxCAT;624261
+PSC;497650
+CatComú-Podem;276810
+CUP;143711
+PP;142934
+PACMA;31330
+RECORTES CERO-GRUPO VERDE;8621
+
+#C's	24	868.365	26,54%
+#ERC-CatSí	18	678.030	20,72%
+#JUNTSxCAT	17	624.261	19,08%
+#PSC	13	497.650	15,21%
+#CatComú-Podem	7	276.810	8,46%
+#CUP	3	143.711	4,39%
+#PP	3	142.934	4,37%
+#PACMA	0	31.330	0,96%
+#RECORTES CERO-GRUPO VERDE	0	8.621	0,26%
