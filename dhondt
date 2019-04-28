@@ -85,24 +85,27 @@ def load_data(stream, listProcessedLines):
 import sys
 import getopt
 
-outputFormat = "html"
+optNameHelp, optNameFormat, optNameLength = ("help", "output_format=", "name_length=")
+optValueFormat_text, optValueFormat_html  = ("text", "html")
+
+outputFormat = optValueFormat_html
 nameLength = 9
 
-usageText = "usage: [-h/--help] [-o/--output_format <text|html>] [-l/--name_length <max length>]"
+usageText = "usage: [-h/--%s] [-o/--%s <%s|%s>] [-l/--%s <max length>]" % (optNameHelp, optNameFormat, optValueFormat_text, optValueFormat_html, optNameLength)
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "ho:l:", ["help", "output_format=", "name_length="])
+    opts, args = getopt.getopt(sys.argv[1:], "ho:l:", [optNameHelp, optNameFormat + "=", optNameLength + "="])
 except getopt.GetoptError as err:
     print(usageText)
     sys.exit(err)
 
 for optTup in opts:
     opt = optTup[0]
-    if opt == "-h" or opt == "--help":
+    if opt == "-h" or opt == "--" + optNameHelp:
         print(usageText)
         sys.exit(0)
-    elif opt == "-o" or opt == "--output_format": # TODO : dont duplicate options literals
+    elif opt == "-o" or opt == "--" + optNameFormat:
         outputFormat = optTup[1]
-    elif opt == "-l" or opt == "--name_length": # TODO : dont duplicate options literals
+    elif opt == "-l" or opt == "--" + optNameLength:
         try:
             nameLength = int(optTup[1])
         except:
@@ -189,7 +192,7 @@ try:
                 + " MSL |  MSL % |"
                 )
 
-        if outputFormat == "html":
+        if outputFormat == optValueFormat_html:
           for p in sorted_parties:
             xprint("<tr>")
             xprint("<td>%s</td>" % (p[:nameLength], ))
