@@ -79,16 +79,20 @@ def load_data(stream):
             votes[party_str] = int(votes_str)
     return (total_seats, votes)
 
-# Get file names.
 import sys
+# Get file names.
 try:
-    (input_filename, output_filename) = tuple(sys.argv[1:])
-except ValueError:
-    sys.exit("Usage: %s VOTING_DATA_FILE OUTPUT_HTML_FILE" % (sys.argv[0], ))
+    output_filename = sys.argv[2]
+except IndexError:
+    output_filename = None
+try:
+    input_filename = sys.argv[1]
+except IndexError:
+    input_filename = None
 
 # Load input data.
 try:
-    with open(input_filename, "r") as stream:
+    with open(input_filename, "r") if not input_filename == None else sys.stdin as stream:
         (total_seats, votes) = load_data(stream)
 except IOError:
     sys.exit("Unable to open data file")
@@ -121,7 +125,7 @@ sorted_parties.sort(reverse=True)
 sorted_parties = [x[1] for x in sorted_parties]
 
 try:
-    with open(output_filename, "w") as out:
+    with open(output_filename, "w") if not output_filename == None else sys.stdout as out:
         def xprint(something):
             return print(something, file=out)
 
@@ -129,8 +133,8 @@ try:
         xprint('<meta http-equiv="Content-Type" '
                 + 'content="text/html; charset=%s" />'
                 % (locale.getpreferredencoding(), ))
-        xprint("<title>Single voting district for %s</title>"
-                % (input_filename, ))
+        xprint("<title>seats distribution, file %s</title>"
+                % ("[unknown name]" if input_filename == None else input_filename, ))
         xprint('<style type="text/css">')
         xprint("    th, td { padding: 0 .25ex; }")
         xprint("    body { font-family: monospace; }")
