@@ -57,17 +57,17 @@ def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
 # - The first valid line contains the total number of seats.
 # - Party names and number of votes are separated with semicolons.
 #
+# note : listProcessedLines is an empty list used as a trick to know which line has caused an exception
+#
 # Returns a tuple (total_seats, votes) with total_seats being a number and votes
 # being a dictionary.
 #
-def load_data(stream):
+def load_data(stream, listProcessedLines):
     total_seats = 0
     have_seats = False
     votes = dict()
-    numLine = 0
     for line in stream:
-        numLine += 1
-        print("line #%d" % numLine, file=sys.stderr)
+        listProcessedLines.append(len(line)) # appending 1 number (length) per line => know which line in case of format exception
         if line.startswith("#"):
             continue
         line = line.strip()
@@ -93,14 +93,15 @@ try:
 except IndexError:
     input_filename = None
 
+listProcessedLines = [] # for capturing the number of processed lines
 # Load input data.
 try:
     with open(input_filename, "r") if not input_filename == None else sys.stdin as stream:
-        (total_seats, votes) = load_data(stream)
+        (total_seats, votes) = load_data(stream, listProcessedLines)
 except IOError:
     sys.exit("Unable to open data file")
 except ValueError:
-    sys.exit("Invalid line in data file")
+    sys.exit("Invalid line #%d (length=%d) in data file" % (len(listProcessedLines), listProcessedLines[-1] - 1))
 
 # Calculate seats.
 dhondt_seats = dict()
