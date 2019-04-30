@@ -1,4 +1,4 @@
-seats distribution, file input/tgmFR2JxC.txt
+seats distribution, file input/tgnFR2JxC.txt
 
 | Party     |   Votes | Votes% |  DH |   DH % |  SL |   SL % | MSL |  MSL % |
 |-----------|---------|--------|-----|--------|-----|--------|-----|--------|
@@ -16,5 +16,6 @@ seats distribution, file input/tgmFR2JxC.txt
 | CNV       |     262 |   0.06 |   0 |   0.00 |   0 |   0.00 |   0 |   0.00 |
 | PCPC      |     257 |   0.06 |   0 |   0.00 |   0 |   0.00 |   0 |   0.00 |
 | IZQP      |     190 |   0.05 |   0 |   0.00 |   0 |   0.00 |   0 |   0.00 |
+| FRONT REP |       0 |   0.00 |   0 |   0.00 |   0 |   0.00 |   0 |   0.00 |
 |-----------|---------|--------|-----|--------|-----|--------|-----|--------|
 |           |         |        |   6 |        |   6 |        |   6 |        |
