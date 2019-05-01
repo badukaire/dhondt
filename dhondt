@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import pprint
+
 #
 # A few different formulas for quotients.
 # - the D'Hondt formula is the most restrictive with small parties
@@ -37,16 +39,22 @@ def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
     resultDict.clear()
     for p in party_votes:
         resultDict[p] = 0
+        print("votes for %s = %d" % (p, party_votes[p]))
         for s in range(0, total_seats):
+            print("--------")
             q = quotient_formula(party_votes[p], s)
+            print("seat #%d => %f" % (s, q))
             quot.append((q, p))
 
     # Sort the quotients by value.
     quot.sort(reverse=True)
+    pprint.pprint(quot)
 
     # Take the highest quotients with the assigned parties.
     for s in range(0, total_seats):
         resultDict[quot[s][1]] += 1
+    pprint.pprint(resultDict)
+    sys.exit(0)
 
     return len(resultDict)
 
@@ -132,9 +140,13 @@ except IOError:
 except ValueError:
     sys.exit("Invalid line #%d (length=%d) in data file" % (len(listProcessedLines), listProcessedLines[-1] - 1))
 
+print(votes)
 # Calculate seats.
 dhondt_seats = dict()
 proportional_seats(votes, total_seats, dhondt_formula, dhondt_seats)
+print(dhondt_seats)
+sys.exit(0)
+
 sl_seats = dict()
 proportional_seats(votes, total_seats, sl_formula, sl_seats)
 modified_sl_seats = dict()
