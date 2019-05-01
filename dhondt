@@ -44,7 +44,7 @@ def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
             print("--------")
             q = quotient_formula(party_votes[p], s)
             print("seat #%d => %f" % (s, q))
-            quot.append((q, p))
+            quot.append((q, s, p))
 
     # Sort the quotients by value.
     quot.sort(reverse=True)
@@ -52,7 +52,7 @@ def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
 
     # Take the highest quotients with the assigned parties.
     for s in range(0, total_seats):
-        resultDict[quot[s][1]] += 1
+        resultDict[quot[s][2]] += 1
     pprint.pprint(resultDict)
     sys.exit(0)
 
