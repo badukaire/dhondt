@@ -200,12 +200,14 @@ try:
             xprint("| %-*s " % (nameLength, partyText[:nameLength], )
                 + "|   Votes | Votes% |"
                 + "  DH |   DH % |"
+                +(" DH V/S  |" if showVotesPerSeat else "")
                 + "  SL |   SL % |"
                 + " MSL |  MSL % |"
                 )
             tableColumn = ("|-%s-" % (nameLength * "-", )
                 + "|---------|--------|"
                 + "-----|--------|"
+                +("---------|" if showVotesPerSeat else "")
                 + "-----|--------|"
                 + "-----|--------|"
                 )
@@ -236,6 +238,7 @@ try:
                  + "| %6.2f " % (votes_pct[p], )
                  + "| %3s " % (dhondt_seats[p], )
                  + "| %6.2f " % (dhondt_seats_pct[p], )
+                 +("| %7d " % (votes[p] / dhondt_seats[p] ) if dhondt_seats_pct[p] > 0 else "|      -- " if showVotesPerSeat else "")
                  + "| %3s " % (sl_seats[p], )
                  + "| %6.2f " % (sl_seats_pct[p], )
                  + "| %3s " % (modified_sl_seats[p], )
@@ -260,6 +263,7 @@ try:
                  + "|        "
                  + "| %3s " % (dhondt_seats_total, )
                  + "|        "
+                 +("|         " if showVotesPerSeat else "")
                  + "| %3s " % (sl_seats_total, )
                  + "|        "
                  + "| %3s " % (modified_sl_seats_total, )
