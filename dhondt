@@ -48,6 +48,8 @@ def proportional_seats(party_votes, total_seats, quotient_formula, resultDict):
 
     # Sort the quotients by value.
     quot.sort(reverse=True)
+    # TODO : re-learn to sort with a lambda by the 2nd element, this way
+    # the seat number appears first
     pprint.pprint(quot)
 
     # Take the highest quotients with the assigned parties.
