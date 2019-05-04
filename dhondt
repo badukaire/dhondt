@@ -85,15 +85,20 @@ def load_data(stream, listProcessedLines):
 import sys
 import getopt
 
-optNameHelp, optNameFormat, optNameLength = ("help", "output_format=", "name_length=")
+optNameHelp, optNameFormat, optNameLength, optNameVotesSeat = ("help", "output_format=", "name_length=", "votes_seat")
 optValueFormat_text, optValueFormat_html  = ("text", "html")
 
 outputFormat = optValueFormat_html
 nameLength = 9
+showVotesPerSeat = False
 
-usageText = "usage: [-h/--%s] [-o/--%s <%s|%s>] [-l/--%s <max length>]" % (optNameHelp, optNameFormat, optValueFormat_text, optValueFormat_html, optNameLength)
+usageTextFormat = "usage: [-h/--%s] [-o/--%s <%s|%s>]"
+usageTextFormat += "\n  [-l/--%s <max length>] [-v/--%s]"
+usageTextFormat += "\n  [<input file>] [<output file>] # stdin/stdout if not provided"
+usageTextFormat += "\n"
+usageText = usageTextFormat % (optNameHelp, optNameFormat, optValueFormat_text, optValueFormat_html, optNameLength, optNameVotesSeat)
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "ho:l:", [optNameHelp, optNameFormat + "=", optNameLength + "="])
+    opts, args = getopt.getopt(sys.argv[1:], "ho:l:v", [optNameHelp, optNameFormat + "=", optNameLength + "=", optNameVotesSeat])
 except getopt.GetoptError as err:
     print(usageText)
     sys.exit(err)
@@ -110,6 +115,8 @@ for optTup in opts:
             nameLength = int(optTup[1])
         except:
             print("%s not a valid number, using default (%d)" % (optTup[1], nameLength), file=sys.stderr)
+    elif opt == "-v" or opt == "--" + optNameVotesSeat:
+        showVotesPerSeat = True
 
 
 # Get file names.
