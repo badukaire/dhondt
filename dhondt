@@ -202,14 +202,18 @@ try:
                 + "  DH |   DH % |"
                 +(" DH V/S  |" if showVotesPerSeat else "")
                 + "  SL |   SL % |"
+                +(" SL V/S  |" if showVotesPerSeat else "")
                 + " MSL |  MSL % |"
+                +(" MSL V/S |" if showVotesPerSeat else "")
                 )
             tableColumn = ("|-%s-" % (nameLength * "-", )
                 + "|---------|--------|"
                 + "-----|--------|"
                 +("---------|" if showVotesPerSeat else "")
                 + "-----|--------|"
+                +("---------|" if showVotesPerSeat else "")
                 + "-----|--------|"
+                +("---------|" if showVotesPerSeat else "")
                 )
             xprint(tableColumn)
 
@@ -241,8 +245,11 @@ try:
                  +("| %7d " % (votes[p] / dhondt_seats[p] ) if dhondt_seats_pct[p] > 0 else "|      -- " if showVotesPerSeat else "")
                  + "| %3s " % (sl_seats[p], )
                  + "| %6.2f " % (sl_seats_pct[p], )
+                 +("| %7d " % (votes[p] / sl_seats[p] ) if sl_seats_pct[p] > 0 else "|      -- " if showVotesPerSeat else "")
                  + "| %3s " % (modified_sl_seats[p], )
-                 + "| %6.2f |" % (modified_sl_seats_pct[p], ))
+                 + "| %6.2f " % (modified_sl_seats_pct[p], )
+                 +("| %7d " % (votes[p] / modified_sl_seats[p] ) if modified_sl_seats_pct[p] > 0 else "|      -- " if showVotesPerSeat else "")
+                 + "|")
         if outputFormat == optValueFormat_html:
             xprint("<tr>")
             xprint("<td></td>")
@@ -266,7 +273,10 @@ try:
                  +("|         " if showVotesPerSeat else "")
                  + "| %3s " % (sl_seats_total, )
                  + "|        "
+                 +("|         " if showVotesPerSeat else "")
                  + "| %3s " % (modified_sl_seats_total, )
-                 + "|        |")
+                 + "|        "
+                 +("|         " if showVotesPerSeat else "")
+                 + "|")
 except IOError:
     sys.exit("Unable to write results to output file")
