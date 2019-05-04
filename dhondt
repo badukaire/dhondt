@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-# TODO : display average cost (total)
 # TODO : display average cost (per party)
 # TODO : display sum of computed votes
 # TODO : -t lost/thrown-away votes option
@@ -267,7 +266,7 @@ try:
             xprint(tableColumn)
             xprint("| %s " % (nameLength * " ", )
                  + "|         "
-                 + "|        "
+                 +("|        " if not showVotesPerSeat else "| %6d " % ( total_votes / total_seats ) )
                  + "| %3s " % (dhondt_seats_total, )
                  + "|        "
                  +("|         " if showVotesPerSeat else "")
